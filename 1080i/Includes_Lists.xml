@@ -865,6 +865,7 @@
             <animation effect="fade" start="0" end="0" time="600" reversible="false">Focus</animation>
             <include content="List_Widget_Row_HiddenButton_OnFocus">
                 <param name="id">$PARAM[id]</param>
+                <param name="container">$PARAM[container]</param>
             </include>
         </control>
     </include>
@@ -955,6 +956,7 @@
                     <param name="height">$PARAM[itemlayout_h]</param>
                     <include condition="$PARAM[hidden_button_enabled]" content="$PARAM[hidden_button]">
                         <param name="id">$PARAM[id]</param>
+                        <param name="container">Container($PARAM[id]).</param>
                         <param name="prefix">$PARAM[hidden_button_prefix]</param>
                     </include>
                     <control type="group">
