@@ -442,7 +442,7 @@
                     <include content="View_Line">
                         <param name="use_spinner">true</param>
                         <param name="run_spinner">[Container(301).IsUpdating]</param>
-                        <param name="label">$INFO[Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Label),, ]</param>
+                        <param name="label">$INFO[Window($PARAM[window]).Property(AppSpotlight.Label),, ]$INFO[Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Label),, ]</param>
                         <param name="top">20</param>
                     </include>
                 </control>
@@ -576,6 +576,15 @@
         <value condition="Control.IsVisible(508)">SetFocus(508)</value>
         <value condition="Control.IsVisible(509)">SetFocus(509)</value>
         <value condition="Control.IsVisible(510)">SetFocus(510)</value>
+    </variable>
+
+    <variable name="Home_Spotlight_Content">
+        <value condition="!String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">$INFO[Window(Home).Property(AppSpotlight.Path)]</value>
+        <value>$INFO[Skin.String(HomeSwitcher.Home.Spotlight.Path)]</value>
+    </variable>
+    <variable name="Home_Spotlight_Target">
+        <value condition="!String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">videos</value>
+        <value>$INFO[Skin.String(HomeSwitcher.Home.Spotlight.Target)]</value>
     </variable>
 
     <include name="Hub_Spotlight_List">
@@ -723,7 +732,16 @@
             <include>Hub_Window_Background</include>
 
             <!-- Spotlight List -->
-            <include content="Hub_Spotlight_List" condition="!String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target)) + $PARAM[spotlight]">
+            <!-- Home keeps the hidden carousel ready so a focused app can change its source. -->
+            <include content="Hub_Spotlight_List" condition="$PARAM[spotlight] + String.IsEqual($PARAM[window],home)">
+                <param name="window">Home</param>
+                <param name="content">$VAR[Home_Spotlight_Content]</param>
+                <param name="sortby">$INFO[Skin.String(HomeSwitcher.Home.Spotlight.SortMethod)]</param>
+                <param name="sortorder">$INFO[Skin.String(HomeSwitcher.Home.Spotlight.SortOrder)]</param>
+                <param name="target">$VAR[Home_Spotlight_Target]</param>
+                <param name="limit">$INFO[Skin.String(HomeSwitcher.Home.Spotlight.Limit)]</param>
+            </include>
+            <include content="Hub_Spotlight_List" condition="!String.IsEqual($PARAM[window],home) + !String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target)) + $PARAM[spotlight]">
                 <param name="window">$PARAM[window]</param>
                 <param name="content">$INFO[Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Path)]</param>
                 <param name="sortby">$INFO[Skin.String(HomeSwitcher.$PARAM[window].Spotlight.SortMethod)]</param>
