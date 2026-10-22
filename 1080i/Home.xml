@@ -27,4 +27,7 @@
             <param name="window">home</param>
         </include>
     </controls>
+    <onunload>ClearProperty(AppSpotlight.Path)</onunload>
+    <onunload>ClearProperty(AppSpotlight.Label)</onunload>
+    <onunload>ClearProperty(TMDbHelper.WidgetContainer,Home)</onunload>
 </window>
