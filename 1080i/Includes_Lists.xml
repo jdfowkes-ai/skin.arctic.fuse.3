@@ -879,6 +879,13 @@
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Year,$ESCINFO[$PARAM[container]ListItem.Year])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Studio,$ESCINFO[$PARAM[container]ListItem.Studio])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].FolderPath,$ESCINFO[$PARAM[container]ListItem.FolderPath])</onfocus>
+            <!-- A focused Unified Lists app may supply a feed for the Home spotlight. -->
+            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(AppSpotlight.Path,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_path)],Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(AppSpotlight.Label,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_label)],Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(TMDbHelper.WidgetContainer,301,Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">ClearProperty(AppSpotlight.Path,Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">ClearProperty(AppSpotlight.Label,Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(TMDbHelper.WidgetContainer,$PARAM[id],Home)</onfocus>
             <onfocus condition="$PARAM[condition] + !String.IsEqual($PARAM[container]ListItem.DBType,episode)">SetProperty(WidgetMeta.$PARAM[id].TMDb_ID,$ESCINFO[$PARAM[container]ListItem.UniqueID(tmdb)])</onfocus>
             <onfocus condition="$PARAM[condition] + String.IsEqual($PARAM[container]ListItem.DBType,episode)">ClearProperty(WidgetMeta.$PARAM[id].TMDb_ID)</onfocus>
 
