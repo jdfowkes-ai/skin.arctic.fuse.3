@@ -448,6 +448,8 @@
                 </control>
 
                 <control type="grouplist" id="310">
+                    <!-- App spotlight shares the hero while leaving the Apps row unobstructed. -->
+                    <visible>String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
 
                     <include content="Animation_Fade_Out">
                         <param name="condition">!ControlGroup(310).HasFocus() + !String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + Skin.HasSetting(Spotlight.EnableSlide)</param>
@@ -597,7 +599,7 @@
                 <onfocus>ClearProperty(Background.ShowOverlay,Home)</onfocus>
 
                 <onfocus condition="Integer.IsEqual(Container(301).NumItems,0)">SetFocus(300)</onfocus>
-                <onfocus condition="!Integer.IsEqual(Container(301).NumItems,0)">SetFocus(311)</onfocus>
+                <onfocus condition="!Integer.IsEqual(Container(301).NumItems,0) + String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetFocus(311)</onfocus>
 
                 <visible>$EXP[Exp_Hubs_Spotlight_HasItems]</visible>
 
