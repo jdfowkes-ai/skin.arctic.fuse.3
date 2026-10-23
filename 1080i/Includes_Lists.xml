@@ -337,7 +337,6 @@
                 <focusedlayout width="$PARAM[itemlayout_w]" height="$PARAM[itemlayout_h]">
                     <include condition="$PARAM[hidden_button_enabled]" content="$PARAM[hidden_button]">
                         <param name="id">$PARAM[id]</param>
-                        <param name="container">Container($PARAM[id]).</param>
                     </include>
                     <control type="group">
                         <left>$PARAM[offset_x]</left>
@@ -422,7 +421,6 @@
                 <focusedlayout width="$PARAM[itemlayout_w]" height="$PARAM[itemlayout_h]">
                     <include condition="$PARAM[hidden_button_enabled]" content="$PARAM[hidden_button]">
                         <param name="id">$PARAM[id]</param>
-                        <param name="container">Container($PARAM[id]).</param>
                     </include>
                     <control type="group">
                         <left>$PARAM[offset_x]</left>
@@ -664,7 +662,7 @@
             </include>
         </definition>
     </include>
-    
+
     <include name="List_Square_Row">
         <param name="item_w">view_poster_item_w</param>
         <param name="item_h">view_poster_item_w</param>
@@ -784,7 +782,6 @@
                 <focusedlayout height="120" width="$PARAM[itemlayout_w]">
                     <include content="$PARAM[hidden_button]" condition="$PARAM[hidden_button_enabled]">
                         <param name="id">$PARAM[id]</param>
-                        <param name="container">Container($PARAM[id]).</param>
                         <param name="prefix">$PARAM[hidden_button_prefix]</param>
                     </include>
                     <control type="group">
@@ -883,27 +880,13 @@
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Year,$ESCINFO[$PARAM[container]ListItem.Year])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Studio,$ESCINFO[$PARAM[container]ListItem.Studio])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].FolderPath,$ESCINFO[$PARAM[container]ListItem.FolderPath])</onfocus>
-            <!-- Keep each focus action separate: Kodi rejects a semicolon-chained SetProperty with plugin URLs. -->
-            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path)) + !String.IsEqual(Window(Home).Property(AppSpotlight.Reload),$PARAM[container]ListItem.Property(app_spotlight_reload))">SetProperty(AppSpotlight.Pending,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_reload)],Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),$PARAM[container]ListItem.Property(app_spotlight_reload))">SetProperty(AppSpotlight.Path,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_path)],Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),$PARAM[container]ListItem.Property(app_spotlight_reload))">SetProperty(AppSpotlight.Label,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_label)],Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),$PARAM[container]ListItem.Property(app_spotlight_reload))">SetProperty(AppSpotlight.Reload,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_reload)],Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),$PARAM[container]ListItem.Property(app_spotlight_reload))">SetProperty(AppSpotlight.ReturnControl,$PARAM[id],Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),$PARAM[container]ListItem.Property(app_spotlight_reload))">SetProperty(AppSpotlight.ReturnPosition,$INFO[Container($PARAM[id]).Position],Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),$PARAM[container]ListItem.Property(app_spotlight_reload))">SetProperty(TMDbHelper.WidgetContainer,301,Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),$PARAM[container]ListItem.Property(app_spotlight_reload))">SetFocus(301)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),$PARAM[container]ListItem.Property(app_spotlight_reload))">SetFocus($INFO[Window(Home).Property(AppSpotlight.ReturnControl)],$INFO[Window(Home).Property(AppSpotlight.ReturnPosition)])</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),$PARAM[container]ListItem.Property(app_spotlight_reload))">ClearProperty(AppSpotlight.Pending,Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path)) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetProperty(AppSpotlight.Pending,clear,Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),clear)">ClearProperty(AppSpotlight.Path,Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),clear)">ClearProperty(AppSpotlight.Label,Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),clear)">SetProperty(AppSpotlight.Reload,default,Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),clear)">SetProperty(AppSpotlight.ReturnControl,$PARAM[id],Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),clear)">SetProperty(AppSpotlight.ReturnPosition,$INFO[Container($PARAM[id]).Position],Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),clear)">SetFocus(301)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),clear)">SetFocus($INFO[Window(Home).Property(AppSpotlight.ReturnControl)],$INFO[Window(Home).Property(AppSpotlight.ReturnPosition)])</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),clear)">SetProperty(TMDbHelper.WidgetContainer,$PARAM[id],Home)</onfocus>
-            <onfocus condition="$PARAM[condition] + String.IsEqual(Window(Home).Property(AppSpotlight.Pending),clear)">ClearProperty(AppSpotlight.Pending,Home)</onfocus>
+            <!-- A focused Unified Lists app may supply a feed for the Home spotlight. -->
+            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(AppSpotlight.Path,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_path)],Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(AppSpotlight.Label,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_label)],Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(TMDbHelper.WidgetContainer,301,Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">ClearProperty(AppSpotlight.Path,Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">ClearProperty(AppSpotlight.Label,Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(TMDbHelper.WidgetContainer,$PARAM[id],Home)</onfocus>
             <onfocus condition="$PARAM[condition] + !String.IsEqual($PARAM[container]ListItem.DBType,episode)">SetProperty(WidgetMeta.$PARAM[id].TMDb_ID,$ESCINFO[$PARAM[container]ListItem.UniqueID(tmdb)])</onfocus>
             <onfocus condition="$PARAM[condition] + String.IsEqual($PARAM[container]ListItem.DBType,episode)">ClearProperty(WidgetMeta.$PARAM[id].TMDb_ID)</onfocus>
 
