@@ -579,7 +579,7 @@
     </variable>
 
     <variable name="Home_Spotlight_Content">
-        <value condition="!String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">$INFO[Window(Home).Property(AppSpotlight.Path)]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">$INFO[Window(Home).Property(AppSpotlight.Path)]&amp;reload=$INFO[Window(Home).Property(AppSpotlight.Reload)]</value>
         <value>$INFO[Skin.String(HomeSwitcher.Home.Spotlight.Path)]</value>
     </variable>
     <variable name="Home_Spotlight_Target">
