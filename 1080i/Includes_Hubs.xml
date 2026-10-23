@@ -593,6 +593,7 @@
             <control type="wraplist" id="301">
                 <preloaditems>2</preloaditems>
                 <onfocus>SetProperty(TMDbHelper.WidgetContainer,301,$PARAM[window])</onfocus>
+                <onfocus condition="!String.IsEqual(Window(Home).Property(AppSpotlight.Reload),Window(Home).Property(AppSpotlight.Loaded))">SetProperty(AppSpotlight.Loaded,$INFO[Window(Home).Property(AppSpotlight.Reload)],Home);Container.Update($VAR[Home_Spotlight_Content])</onfocus>
                 <onfocus>ClearProperty(Background.ShowOverlay,Home)</onfocus>
 
                 <onfocus condition="Integer.IsEqual(Container(301).NumItems,0)">SetFocus(300)</onfocus>
