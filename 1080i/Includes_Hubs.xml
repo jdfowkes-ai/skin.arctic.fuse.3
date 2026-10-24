@@ -432,7 +432,7 @@
             <animation effect="slide" start="0" end="0,440" time="400" tween="quadratic" reversible="false" condition="$EXP[Exp_Hubs_Spotlight_SlideDown]">Conditional</animation>
             <animation effect="slide" end="0" start="0,440" time="400" tween="quadratic" reversible="false" condition="![$EXP[Exp_Hubs_Spotlight_SlideDown]]">Conditional</animation>
 
-            <!-- App/studio-only image at window level; ordinary widget art is untouched. -->
+            <!-- App-only hero art at window level; ordinary widget art is untouched. -->
             <control type="image" id="317">
                 <left>0</left>
                 <top>0</top>
@@ -443,6 +443,18 @@
                 <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Blur))</visible>
                 <animation effect="fade" start="0" end="100" time="300" reversible="true">Visible</animation>
                 <animation effect="fade" start="100" end="0" time="200" reversible="true">Hidden</animation>
+            </control>
+
+            <!-- Keep the app name visible above its widget, even while its feed is empty. -->
+            <control type="label" id="318">
+                <left>40</left>
+                <top>276</top>
+                <width>900</width>
+                <height>82</height>
+                <font>font_main_bold</font>
+                <textcolor>main_fg_100</textcolor>
+                <label>$INFO[Window(Home).Property(AppSpotlight.Label)]</label>
+                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Blur))</visible>
             </control>
 
             <control type="group">
@@ -460,20 +472,8 @@
                     </include>
                 </control>
 
-                <!-- Wordmark-style text stays on the left; studio tiles supply the name. -->
-                <control type="label" id="318">
-                    <left>40</left>
-                    <top>16</top>
-                    <width>900</width>
-                    <height>82</height>
-                    <font>font_main_bold</font>
-                    <textcolor>main_fg_100</textcolor>
-                    <label>$INFO[Window(Home).Property(AppSpotlight.Label)]</label>
-                    <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Blur))</visible>
-                </control>
-
                 <control type="grouplist" id="310">
-                    <!-- App spotlight shares the hero while leaving the Apps row unobstructed. -->
+                    <!-- The app feed stays in the hero carousel without taking focus from Apps. -->
                     <visible>String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
 
                     <include content="Animation_Fade_Out">
@@ -623,7 +623,7 @@
                 <onfocus condition="!String.IsEqual(Window(Home).Property(AppSpotlight.Reload),Window(Home).Property(AppSpotlight.Loaded))">SetProperty(AppSpotlight.Loaded,$INFO[Window(Home).Property(AppSpotlight.Reload)],Home);Container.Update($VAR[Home_Spotlight_Content])</onfocus>
                 <onfocus>ClearProperty(Background.ShowOverlay,Home)</onfocus>
 
-                <onfocus condition="Integer.IsEqual(Container(301).NumItems,0)">SetFocus(300)</onfocus>
+                <onfocus condition="Integer.IsEqual(Container(301).NumItems,0) + String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetFocus(300)</onfocus>
                 <onfocus condition="!Integer.IsEqual(Container(301).NumItems,0) + String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetFocus(311)</onfocus>
 
                 <visible>$EXP[Exp_Hubs_Spotlight_HasItems]</visible>
