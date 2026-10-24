@@ -881,6 +881,8 @@
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Studio,$ESCINFO[$PARAM[container]ListItem.Studio])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].FolderPath,$ESCINFO[$PARAM[container]ListItem.FolderPath])</onfocus>
             <!-- The app tile's fanart fills the hero; its icon is layered over it. -->
+            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_blur))">SetProperty(AppSpotlight.Blur,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_blur)],Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_blur))">ClearProperty(AppSpotlight.Blur,Home)</onfocus>
             <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_logo))">SetProperty(AppSpotlight.Logo,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_logo)],Home)</onfocus>
             <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_logo))">ClearProperty(AppSpotlight.Logo,Home)</onfocus>
             <!-- A focused Unified Lists app may supply a feed for the Home spotlight. -->
@@ -1019,3 +1021,4 @@
     </include>
 
 </includes>
+
