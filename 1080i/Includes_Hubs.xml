@@ -447,6 +447,17 @@
                     </include>
                 </control>
 
+                <!-- Overlay the focused app's brand icon on its full-width fanart. -->
+                <control type="image" id="313">
+                    <top>50</top>
+                    <right>120</right>
+                    <width>180</width>
+                    <height>180</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$INFO[Window(Home).Property(AppSpotlight.Logo)]</texture>
+                    <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Logo))</visible>
+                </control>
+
                 <control type="grouplist" id="310">
                     <!-- App spotlight shares the hero while leaving the Apps row unobstructed. -->
                     <visible>String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
