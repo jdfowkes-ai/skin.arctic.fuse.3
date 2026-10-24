@@ -447,12 +447,25 @@
                     </include>
                 </control>
 
-                <!-- Overlay the focused app's brand icon on its full-width fanart. -->
+                <!-- The Apps row uses its own pre-blurred app art; this does not change other widgets. -->
+                <control type="image" id="317">
+                    <left>0</left>
+                    <top>-260</top>
+                    <width>1920</width>
+                    <height>1080</height>
+                    <aspectratio>scale</aspectratio>
+                    <texture background="true">$INFO[Window(Home).Property(AppSpotlight.Blur)]</texture>
+                    <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Blur)) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Logo))</visible>
+                    <animation effect="fade" start="0" end="100" time="300" reversible="true">Visible</animation>
+                    <animation effect="fade" start="100" end="0" time="200" reversible="true">Hidden</animation>
+                </control>
+
+                <!-- Larger service brand mark over the Apps hero. -->
                 <control type="image" id="313">
-                    <top>50</top>
-                    <right>120</right>
-                    <width>180</width>
-                    <height>180</height>
+                    <top>35</top>
+                    <right>85</right>
+                    <width>360</width>
+                    <height>360</height>
                     <aspectratio>keep</aspectratio>
                     <texture background="true">$INFO[Window(Home).Property(AppSpotlight.Logo)]</texture>
                     <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Logo))</visible>
@@ -1087,3 +1100,4 @@
     </include>
 
 </includes>
+
