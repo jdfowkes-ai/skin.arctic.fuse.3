@@ -883,9 +883,14 @@
             <!-- A focused Unified Lists app may supply a feed for the Home spotlight. -->
             <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(AppSpotlight.Path,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_path)],Home)</onfocus>
             <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(AppSpotlight.Label,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_label)],Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(AppSpotlight.Reload,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_reload)],Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path)) + !String.IsEqual(Window(Home).Property(AppSpotlight.Loaded),$PARAM[container]ListItem.Property(app_spotlight_reload))">Container.Update($VAR[Home_Spotlight_Content])</onfocus>
+            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path)) + !String.IsEqual(Window(Home).Property(AppSpotlight.Loaded),$PARAM[container]ListItem.Property(app_spotlight_reload))">SetProperty(AppSpotlight.Loaded,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_reload)],Home)</onfocus>
             <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(TMDbHelper.WidgetContainer,301,Home)</onfocus>
             <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">ClearProperty(AppSpotlight.Path,Home)</onfocus>
             <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">ClearProperty(AppSpotlight.Label,Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">ClearProperty(AppSpotlight.Reload,Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">ClearProperty(AppSpotlight.Loaded,Home)</onfocus>
             <onfocus condition="$PARAM[condition] + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetProperty(TMDbHelper.WidgetContainer,$PARAM[id],Home)</onfocus>
             <onfocus condition="$PARAM[condition] + !String.IsEqual($PARAM[container]ListItem.DBType,episode)">SetProperty(WidgetMeta.$PARAM[id].TMDb_ID,$ESCINFO[$PARAM[container]ListItem.UniqueID(tmdb)])</onfocus>
             <onfocus condition="$PARAM[condition] + String.IsEqual($PARAM[container]ListItem.DBType,episode)">ClearProperty(WidgetMeta.$PARAM[id].TMDb_ID)</onfocus>
