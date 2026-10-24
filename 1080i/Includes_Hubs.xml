@@ -432,7 +432,7 @@
             <animation effect="slide" start="0" end="0,440" time="400" tween="quadratic" reversible="false" condition="$EXP[Exp_Hubs_Spotlight_SlideDown]">Conditional</animation>
             <animation effect="slide" end="0" start="0,440" time="400" tween="quadratic" reversible="false" condition="![$EXP[Exp_Hubs_Spotlight_SlideDown]]">Conditional</animation>
 
-            <!-- Keep this app-only image at window level so the full-screen hero is not clipped by the spotlight group. -->
+            <!-- App/studio-only image at window level; ordinary widget art is untouched. -->
             <control type="image" id="317">
                 <left>0</left>
                 <top>0</top>
@@ -440,20 +440,9 @@
                 <height>1080</height>
                 <aspectratio>scale</aspectratio>
                 <texture background="true">$INFO[Window(Home).Property(AppSpotlight.Blur)]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Blur)) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Logo))</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Blur))</visible>
                 <animation effect="fade" start="0" end="100" time="300" reversible="true">Visible</animation>
                 <animation effect="fade" start="100" end="0" time="200" reversible="true">Hidden</animation>
-            </control>
-
-            <!-- Large service mark; placed over the app-only hero background. -->
-            <control type="image" id="313">
-                <top>80</top>
-                <right>80</right>
-                <width>420</width>
-                <height>420</height>
-                <aspectratio>keep</aspectratio>
-                <texture background="true">$INFO[Window(Home).Property(AppSpotlight.Logo)]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Logo))</visible>
             </control>
 
             <control type="group">
@@ -466,9 +455,21 @@
                     <include content="View_Line">
                         <param name="use_spinner">true</param>
                         <param name="run_spinner">[Container(301).IsUpdating]</param>
-                        <param name="label">$INFO[Window($PARAM[window]).Property(AppSpotlight.Label),, ]$INFO[Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Label),, ]</param>
+                        <param name="label">$INFO[Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Label),, ]</param>
                         <param name="top">20</param>
                     </include>
+                </control>
+
+                <!-- Wordmark-style text stays on the left; studio tiles supply the name. -->
+                <control type="label" id="318">
+                    <left>40</left>
+                    <top>16</top>
+                    <width>900</width>
+                    <height>82</height>
+                    <font>font_main_bold</font>
+                    <textcolor>main_fg_100</textcolor>
+                    <label>$INFO[Window(Home).Property(AppSpotlight.Label)]</label>
+                    <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Blur))</visible>
                 </control>
 
                 <control type="grouplist" id="310">
