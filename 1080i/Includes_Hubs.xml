@@ -473,7 +473,7 @@
                 </control>
 
                 <control type="grouplist" id="310">
-                    <!-- The app feed stays in the hero carousel without taking focus from Apps. -->
+                    <!-- Apps use the static hero art above; no app feed carousel. -->
                     <visible>String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
 
                     <include content="Animation_Fade_Out">
@@ -606,11 +606,9 @@
     </variable>
 
     <variable name="Home_Spotlight_Content">
-        <value condition="!String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">$INFO[Window(Home).Property(AppSpotlight.Path)]</value>
         <value>$INFO[Skin.String(HomeSwitcher.Home.Spotlight.Path)]</value>
     </variable>
     <variable name="Home_Spotlight_Target">
-        <value condition="!String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">videos</value>
         <value>$INFO[Skin.String(HomeSwitcher.Home.Spotlight.Target)]</value>
     </variable>
 
@@ -620,7 +618,7 @@
             <control type="wraplist" id="301">
                 <preloaditems>2</preloaditems>
                 <onfocus>SetProperty(TMDbHelper.WidgetContainer,301,$PARAM[window])</onfocus>
-                <onfocus condition="!String.IsEqual(Window(Home).Property(AppSpotlight.Reload),Window(Home).Property(AppSpotlight.Loaded))">SetProperty(AppSpotlight.Loaded,$INFO[Window(Home).Property(AppSpotlight.Reload)],Home);Container.Update($VAR[Home_Spotlight_Content])</onfocus>
+                <onfocus condition="String.IsEmpty(Window(Home).Property(AppSpotlight.Path)) + !String.IsEqual(Window(Home).Property(AppSpotlight.Reload),Window(Home).Property(AppSpotlight.Loaded))">SetProperty(AppSpotlight.Loaded,$INFO[Window(Home).Property(AppSpotlight.Reload)],Home);Container.Update($VAR[Home_Spotlight_Content])</onfocus>
                 <onfocus>ClearProperty(Background.ShowOverlay,Home)</onfocus>
 
                 <onfocus condition="Integer.IsEqual(Container(301).NumItems,0) + String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetFocus(300)</onfocus>
@@ -760,7 +758,7 @@
             <include>Hub_Window_Background</include>
 
             <!-- Spotlight List -->
-            <!-- Home keeps the hidden carousel ready so a focused app can change its source. -->
+            <!-- Home spotlight content stays independent of the Apps hero art. -->
             <include content="Hub_Spotlight_List" condition="$PARAM[spotlight] + String.IsEqual($PARAM[window],home)">
                 <param name="window">Home</param>
                 <param name="content">$VAR[Home_Spotlight_Content]</param>
