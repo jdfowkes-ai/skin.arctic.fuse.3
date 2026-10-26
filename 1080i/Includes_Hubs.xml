@@ -444,8 +444,26 @@
                 <animation effect="fade" start="100" end="0" time="200" reversible="true">Hidden</animation>
             </control>
 
-            <!-- Keep the app name visible above its widget, even while its feed is empty. -->
-            <control type="label" id="318">
+            <!-- Show the selected app's own wordmark above its widget; use its tile art when no clearlogo is supplied. -->
+            <control type="image" id="318">
+                <left>40</left>
+                <top>120</top>
+                <width>900</width>
+                <height>160</height>
+                <aspectratio>keep</aspectratio>
+                <texture>$VAR[AppSpotlight_SelectedClearlogo]</texture>
+                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Label)) + !String.IsEmpty($VAR[AppSpotlight_SelectedClearlogo])</visible>
+            </control>
+            <control type="image" id="319">
+                <left>40</left>
+                <top>120</top>
+                <width>160</width>
+                <height>160</height>
+                <aspectratio>keep</aspectratio>
+                <texture>$VAR[AppSpotlight_SelectedIcon]</texture>
+                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Label)) + String.IsEmpty($VAR[AppSpotlight_SelectedClearlogo]) + !String.IsEmpty($VAR[AppSpotlight_SelectedIcon])</visible>
+            </control>
+            <control type="label" id="320">
                 <left>40</left>
                 <top>120</top>
                 <width>900</width>
@@ -454,7 +472,7 @@
                 <textcolor>main_fg_100</textcolor>
                 <shadowcolor>66000000</shadowcolor>
                 <label>$INFO[Window(Home).Property(AppSpotlight.Label)]</label>
-                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Label)) + String.IsEmpty($VAR[AppSpotlight_SelectedClearlogo]) + String.IsEmpty($VAR[AppSpotlight_SelectedIcon])</visible>
             </control>
 
             <control type="group">
@@ -613,6 +631,32 @@
     </variable>
     <variable name="Home_Spotlight_Target">
         <value>$INFO[Skin.String(HomeSwitcher.Home.Spotlight.Target)]</value>
+    </variable>
+
+    <variable name="AppSpotlight_SelectedClearlogo">
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),501)">$INFO[Container(501).ListItem.Art(clearlogo)]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),502)">$INFO[Container(502).ListItem.Art(clearlogo)]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),503)">$INFO[Container(503).ListItem.Art(clearlogo)]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),504)">$INFO[Container(504).ListItem.Art(clearlogo)]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),505)">$INFO[Container(505).ListItem.Art(clearlogo)]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),506)">$INFO[Container(506).ListItem.Art(clearlogo)]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),507)">$INFO[Container(507).ListItem.Art(clearlogo)]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),508)">$INFO[Container(508).ListItem.Art(clearlogo)]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),509)">$INFO[Container(509).ListItem.Art(clearlogo)]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),510)">$INFO[Container(510).ListItem.Art(clearlogo)]</value>
+    </variable>
+
+    <variable name="AppSpotlight_SelectedIcon">
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),501)">$INFO[Container(501).ListItem.Icon]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),502)">$INFO[Container(502).ListItem.Icon]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),503)">$INFO[Container(503).ListItem.Icon]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),504)">$INFO[Container(504).ListItem.Icon]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),505)">$INFO[Container(505).ListItem.Icon]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),506)">$INFO[Container(506).ListItem.Icon]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),507)">$INFO[Container(507).ListItem.Icon]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),508)">$INFO[Container(508).ListItem.Icon]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),509)">$INFO[Container(509).ListItem.Icon]</value>
+        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),510)">$INFO[Container(510).ListItem.Icon]</value>
     </variable>
 
     <include name="Hub_Spotlight_List">
