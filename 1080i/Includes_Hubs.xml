@@ -334,12 +334,11 @@
     </include>
 
     <include name="Hub_Spotlight_Info">
-        <param name="window">Home</param>
         <control type="group">
             <top>280</top>
             <visible>!$EXP[Exp_InfoDialogs]</visible>
             <visible>$EXP[Hub_Spotlight_Visible_Expression]</visible>
-            <visible>!String.IsEqual($PARAM[window],home) | String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
+            <visible>!Window.IsVisible(Home) | String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
             <animation effect="slide" end="0" start="0,-200" time="400" tween="cubic" easing="out" reversible="false" condition="!Control.HasFocus(300)">Visible</animation>
             <animation effect="slide" start="0" end="0,-200" time="400" tween="cubic" easing="out" reversible="false">Hidden</animation>
             <include>Info_Panel_Dimensions</include>
@@ -440,7 +439,7 @@
                 <height>1080</height>
                 <aspectratio>scale</aspectratio>
                 <texture background="true">$INFO[Window(Home).Property(AppSpotlight.Blur)]</texture>
-                <visible>String.IsEqual($PARAM[window],home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Blur))</visible>
+                <visible>Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Blur))</visible>
                 <animation effect="fade" start="0" end="100" time="300" reversible="true">Visible</animation>
                 <animation effect="fade" start="100" end="0" time="200" reversible="true">Hidden</animation>
             </control>
@@ -451,7 +450,7 @@
                 <top>180</top>
                 <width>1840</width>
                 <height>380</height>
-                <visible>String.IsEqual($PARAM[window],home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
+                <visible>Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
                 <include content="List_Poster_Row">
                     <param name="id">330</param>
                     <param name="offset_x">0</param>
@@ -480,7 +479,7 @@
                 <textcolor>main_fg_100</textcolor>
                 <shadowcolor>66000000</shadowcolor>
                 <label>$VAR[AppSpotlight_EmptyMessage]</label>
-                <visible>String.IsEqual($PARAM[window],home) + !Container(330).IsUpdating + Integer.IsEqual(Container(330).NumItems,0) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
+                <visible>Window.IsVisible(Home) + !Container(330).IsUpdating + Integer.IsEqual(Container(330).NumItems,0) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
             </control>
             <control type="button" id="332">
                 <left>60</left>
@@ -493,7 +492,7 @@
                 <label>$VAR[AppSpotlight_OpenAppLabel]</label>
                 <onclick>RunPlugin($VAR[AppSpotlight_OpenAppLink])</onclick>
                 <onfocus>Container.Update($INFO[Window(Home).Property(AppSpotlight.Path)])</onfocus>
-                <visible>String.IsEqual($PARAM[window],home) + !Container(330).IsUpdating + Integer.IsEqual(Container(330).NumItems,0) + !String.IsEmpty($VAR[AppSpotlight_OpenAppLink])</visible>
+                <visible>Window.IsVisible(Home) + !Container(330).IsUpdating + Integer.IsEqual(Container(330).NumItems,0) + !String.IsEmpty($VAR[AppSpotlight_OpenAppLink])</visible>
                 <onup>330</onup>
             </control>
 
@@ -503,7 +502,7 @@
             <animation effect="slide" end="0" start="0,440" time="400" tween="quadratic" reversible="false" condition="![$EXP[Exp_Hubs_Spotlight_SlideDown]]">Conditional</animation>
                 <height>hub_spotlight_h</height>
                 <visible>$EXP[Hub_Spotlight_Visible_Expression]</visible>
-                <visible>!String.IsEqual($PARAM[window],home) | String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
+                <visible>!Window.IsVisible(Home) | String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
                 <include>Home_Info_Animation</include>
                 <control type="group">
                     <animation effect="fade" start="100" end="30" time="200" condition="!ControlGroup(310).HasFocus() + !String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + Skin.HasSetting(Spotlight.EnableSlide)">Conditional</animation>
@@ -517,7 +516,7 @@
 
                 <control type="grouplist" id="310">
                     <!-- Apps use the static hero art above; no app feed carousel. -->
-                    <visible>!String.IsEqual($PARAM[window],home) | String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
+                    <visible>!Window.IsVisible(Home) | String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
 
                     <include content="Animation_Fade_Out">
                         <param name="condition">!ControlGroup(310).HasFocus() + !String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + Skin.HasSetting(Spotlight.EnableSlide)</param>
@@ -702,11 +701,11 @@
             <control type="wraplist" id="301">
                 <preloaditems>2</preloaditems>
                 <onfocus>SetProperty(TMDbHelper.WidgetContainer,301,$PARAM[window])</onfocus>
-                <onfocus condition="String.IsEqual($PARAM[window],home) + String.IsEmpty(Window(Home).Property(AppSpotlight.Path)) + !String.IsEqual(Window(Home).Property(AppSpotlight.Reload),Window(Home).Property(AppSpotlight.Loaded))">SetProperty(AppSpotlight.Loaded,$INFO[Window(Home).Property(AppSpotlight.Reload)],Home);Container.Update($VAR[Home_Spotlight_Content])</onfocus>
+                <onfocus condition="Window.IsVisible(Home) + String.IsEmpty(Window(Home).Property(AppSpotlight.Path)) + !String.IsEqual(Window(Home).Property(AppSpotlight.Reload),Window(Home).Property(AppSpotlight.Loaded))">SetProperty(AppSpotlight.Loaded,$INFO[Window(Home).Property(AppSpotlight.Reload)],Home);Container.Update($VAR[Home_Spotlight_Content])</onfocus>
                 <onfocus>ClearProperty(Background.ShowOverlay,Home)</onfocus>
 
-                <onfocus condition="String.IsEqual($PARAM[window],home) + Integer.IsEqual(Container(301).NumItems,0) + String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetFocus(300)</onfocus>
-                <onfocus condition="String.IsEqual($PARAM[window],home) + !Integer.IsEqual(Container(301).NumItems,0) + String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetFocus(311)</onfocus>
+                <onfocus condition="Window.IsVisible(Home) + Integer.IsEqual(Container(301).NumItems,0) + String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetFocus(300)</onfocus>
+                <onfocus condition="Window.IsVisible(Home) + !Integer.IsEqual(Container(301).NumItems,0) + String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetFocus(311)</onfocus>
 
                 <visible>$EXP[Exp_Hubs_Spotlight_HasItems]</visible>
 
@@ -843,7 +842,7 @@
 
             <!-- Spotlight List -->
             <!-- Home spotlight content stays independent of the Apps hero art. -->
-            <include content="Hub_Spotlight_List" condition="$PARAM[spotlight] + String.IsEqual($PARAM[window],home)">
+            <include content="Hub_Spotlight_List" condition="$PARAM[spotlight] + Window.IsVisible(Home)">
                 <param name="window">Home</param>
                 <param name="content">$VAR[Home_Spotlight_Content]</param>
                 <param name="sortby">$INFO[Skin.String(HomeSwitcher.Home.Spotlight.SortMethod)]</param>
@@ -851,7 +850,7 @@
                 <param name="target">$VAR[Home_Spotlight_Target]</param>
                 <param name="limit">$INFO[Skin.String(HomeSwitcher.Home.Spotlight.Limit)]</param>
             </include>
-            <include content="Hub_Spotlight_List" condition="!String.IsEqual($PARAM[window],home) + !String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target)) + $PARAM[spotlight]">
+            <include content="Hub_Spotlight_List" condition="!Window.IsVisible(Home) + !String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target)) + $PARAM[spotlight]">
                 <param name="window">$PARAM[window]</param>
                 <param name="content">$INFO[Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Path)]</param>
                 <param name="sortby">$INFO[Skin.String(HomeSwitcher.$PARAM[window].Spotlight.SortMethod)]</param>
@@ -912,9 +911,7 @@
                         <!-- Info Panels -->
                         <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">skinvariables-$PARAM[window]widgets-wall-info</include>
                         <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined) | String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Standard)">skinvariables-$PARAM[window]widgets-combined-info</include>
-                        <include content="Hub_Spotlight_Info" condition="!String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target))">
-                            <param name="window">$PARAM[window]</param>
-                        </include>
+                        <include condition="!String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target))">Hub_Spotlight_Info</include>
                     </control>
                     <include content="Hub_VertMenu" condition="Skin.HasSetting(HomeSwitcher.Vertical)">
                         <param name="window">$PARAM[window]</param>
