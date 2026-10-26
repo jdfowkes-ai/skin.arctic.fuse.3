@@ -709,7 +709,7 @@
 
     <include name="List_ButtonMenu_Row_HiddenButton_View">
         <control type="button">
-            <onup condition="Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetFocus(329)</onup>
+            <onup condition="Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">329</onup>
             <visible allowhiddenfocus="true">false</visible>
             <animation effect="fade" start="0" end="0" time="400" reversible="false">Focus</animation>
             <include>List_ButtonMenu_Row_HiddenButton_View_OnFocus</include>
@@ -749,7 +749,7 @@
         <param name="underline">false</param>
         <definition>
             <control type="$PARAM[control]" id="$PARAM[id]">
-                <onup condition="Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetFocus(329)</onup>
+                <onup condition="Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">329</onup>
                 <nested />
                 <include content="$PARAM[hidden_button]_OnFocus" condition="$PARAM[hidden_button_enabled]">
                     <param name="id">$PARAM[id]</param>
@@ -876,7 +876,7 @@
         <param name="condition">true</param>
         <definition>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Label,$ESCINFO[$PARAM[container]ListItem.Label])</onfocus>
-            <onup condition="$PARAM[condition] + Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">SetFocus(329)</onup>
+            <onup condition="$PARAM[condition] + Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">329</onup>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Title,$ESCINFO[$PARAM[container]ListItem.Title])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].TVShowTitle,$ESCINFO[$PARAM[container]ListItem.TVShowTitle])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Genre,$ESCINFO[$PARAM[container]ListItem.Genre])</onfocus>
