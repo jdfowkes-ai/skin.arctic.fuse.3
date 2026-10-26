@@ -634,7 +634,6 @@
         <value condition="Control.IsVisible(510)">SetFocus(510)</value>
     </variable>
     <variable name="Hub_Action_Widgets">
-        <value condition="Control.IsVisible(601)">SetFocus(601)</value>
         <value condition="Control.IsVisible(501)">SetFocus(501)</value>
         <value condition="Control.IsVisible(502)">SetFocus(502)</value>
         <value condition="Control.IsVisible(503)">SetFocus(503)</value>
@@ -645,6 +644,7 @@
         <value condition="Control.IsVisible(508)">SetFocus(508)</value>
         <value condition="Control.IsVisible(509)">SetFocus(509)</value>
         <value condition="Control.IsVisible(510)">SetFocus(510)</value>
+        <value condition="Control.IsVisible(601)">SetFocus(601)</value>
     </variable>
 
     <variable name="Home_Spotlight_Content">
