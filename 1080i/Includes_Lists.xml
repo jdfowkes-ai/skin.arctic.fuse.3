@@ -876,7 +876,7 @@
         <param name="condition">true</param>
         <definition>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Label,$ESCINFO[$PARAM[container]ListItem.Label])</onfocus>
-            <onup condition="$PARAM[condition] + Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">329</onup>
+            <onup condition="$PARAM[condition] + Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">330</onup>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Title,$ESCINFO[$PARAM[container]ListItem.Title])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].TVShowTitle,$ESCINFO[$PARAM[container]ListItem.TVShowTitle])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Genre,$ESCINFO[$PARAM[container]ListItem.Genre])</onfocus>
