@@ -446,6 +446,7 @@
 
             <!-- The selected app's saved spotlight source supplies this fixed poster wall. -->
             <control type="group" id="329">
+                <defaultcontrol>330</defaultcontrol>
                 <left>40</left>
                 <top>180</top>
                 <width>1840</width>
