@@ -244,6 +244,7 @@
                 <param name="hidden_button_enabled">true</param>
                 <param name="hidden_button">$PARAM[widgethiddenbutton]</param>
                 <nested />
+                <onup condition="!String.IsEmpty(Container($PARAM[id]).ListItem.Property(app_spotlight_path))">330</onup>
                 <include content="Object_HitRect">
                     <param name="x">0</param>
                     <param name="y">130</param>
