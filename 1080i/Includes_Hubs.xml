@@ -444,35 +444,17 @@
                 <animation effect="fade" start="100" end="0" time="200" reversible="true">Hidden</animation>
             </control>
 
-            <!-- Show the selected app's own wordmark above its widget; use its tile art when no clearlogo is supplied. -->
-            <control type="image" id="318">
+            <!-- Keep the selected network's branded name visible above its widget. -->
+            <control type="label" id="318">
                 <left>40</left>
                 <top>120</top>
                 <width>900</width>
-                <height>160</height>
-                <aspectratio>keep</aspectratio>
-                <texture>$VAR[AppSpotlight_SelectedClearlogo]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Label)) + !String.IsEmpty($VAR[AppSpotlight_SelectedClearlogo])</visible>
-            </control>
-            <control type="image" id="319">
-                <left>40</left>
-                <top>120</top>
-                <width>160</width>
-                <height>160</height>
-                <aspectratio>keep</aspectratio>
-                <texture>$VAR[AppSpotlight_SelectedIcon]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Label)) + String.IsEmpty($VAR[AppSpotlight_SelectedClearlogo]) + !String.IsEmpty($VAR[AppSpotlight_SelectedIcon])</visible>
-            </control>
-            <control type="label" id="320">
-                <left>40</left>
-                <top>120</top>
-                <width>900</width>
-                <height>82</height>
+                <height>100</height>
                 <font>font_head_bold</font>
-                <textcolor>main_fg_100</textcolor>
+                <textcolor>$VAR[AppSpotlight_BrandColor]</textcolor>
                 <shadowcolor>66000000</shadowcolor>
-                <label>$INFO[Window(Home).Property(AppSpotlight.Label)]</label>
-                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Label)) + String.IsEmpty($VAR[AppSpotlight_SelectedClearlogo]) + String.IsEmpty($VAR[AppSpotlight_SelectedIcon])</visible>
+                <label>$VAR[AppSpotlight_BrandText]</label>
+                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
             </control>
 
             <control type="group">
@@ -633,30 +615,42 @@
         <value>$INFO[Skin.String(HomeSwitcher.Home.Spotlight.Target)]</value>
     </variable>
 
-    <variable name="AppSpotlight_SelectedClearlogo">
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),501)">$INFO[Container(501).ListItem.Art(clearlogo)]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),502)">$INFO[Container(502).ListItem.Art(clearlogo)]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),503)">$INFO[Container(503).ListItem.Art(clearlogo)]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),504)">$INFO[Container(504).ListItem.Art(clearlogo)]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),505)">$INFO[Container(505).ListItem.Art(clearlogo)]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),506)">$INFO[Container(506).ListItem.Art(clearlogo)]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),507)">$INFO[Container(507).ListItem.Art(clearlogo)]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),508)">$INFO[Container(508).ListItem.Art(clearlogo)]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),509)">$INFO[Container(509).ListItem.Art(clearlogo)]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),510)">$INFO[Container(510).ListItem.Art(clearlogo)]</value>
+    <variable name="AppSpotlight_BrandText">
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),YouTube)">YouTube</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Disney+)">Disney+</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Channel 4)">CHANNEL 4</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),BBC iPlayer)">BBC iPlayer</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),ITVX)">itvX</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Netflix)">NETFLIX</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Prime Video)">prime video</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Apple TV)">Apple TV+</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),GeForce NOW)">GEFORCE NOW</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Xbox Cloud Gaming)">XBOX CLOUD GAMING</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),My5)">my5</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),NOW)">NOW</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),discovery+)">discovery+</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),U)">U</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Paramount+)">Paramount+</value>
+        <value>$INFO[Window(Home).Property(AppSpotlight.Label)]</value>
     </variable>
 
-    <variable name="AppSpotlight_SelectedIcon">
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),501)">$INFO[Container(501).ListItem.Icon]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),502)">$INFO[Container(502).ListItem.Icon]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),503)">$INFO[Container(503).ListItem.Icon]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),504)">$INFO[Container(504).ListItem.Icon]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),505)">$INFO[Container(505).ListItem.Icon]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),506)">$INFO[Container(506).ListItem.Icon]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),507)">$INFO[Container(507).ListItem.Icon]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),508)">$INFO[Container(508).ListItem.Icon]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),509)">$INFO[Container(509).ListItem.Icon]</value>
-        <value condition="Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),510)">$INFO[Container(510).ListItem.Icon]</value>
+    <variable name="AppSpotlight_BrandColor">
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Netflix)">FFE50914</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Channel 4)">FF00C8E6</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),BBC iPlayer)">FFFFFFFF</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),ITVX)">FFFFFFFF</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),YouTube)">FFFFFFFF</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Disney+)">FFFFFFFF</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Prime Video)">FFFFFFFF</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Apple TV)">FFFFFFFF</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),GeForce NOW)">FF76B900</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Xbox Cloud Gaming)">FF107C10</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),My5)">FFFFFFFF</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),NOW)">FF6A46FF</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),discovery+)">FFFFFFFF</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),U)">FF6B3FA0</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Paramount+)">FFFFFFFF</value>
+        <value>main_fg_100</value>
     </variable>
 
     <include name="Hub_Spotlight_List">
