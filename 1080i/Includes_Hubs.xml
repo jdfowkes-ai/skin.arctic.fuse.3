@@ -444,17 +444,56 @@
                 <animation effect="fade" start="100" end="0" time="200" reversible="true">Hidden</animation>
             </control>
 
-            <!-- Keep the selected network's branded name visible above its widget. -->
-            <control type="label" id="318">
+            <!-- The selected app's saved spotlight source supplies this fixed poster wall. -->
+            <control type="group" id="329">
                 <left>40</left>
-                <top>120</top>
-                <width>900</width>
-                <height>100</height>
+                <top>180</top>
+                <width>1840</width>
+                <height>380</height>
+                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
+                <include content="List_Poster_Row">
+                    <param name="id">330</param>
+                    <param name="offset_x">0</param>
+                    <param name="offset_y">0</param>
+                    <param name="detailed">false</param>
+                    <orientation>horizontal</orientation>
+                    <left>0</left>
+                    <top>0</top>
+                    <width>1840</width>
+                    <height>380</height>
+                    <onfocus>Container.Update($INFO[Window(Home).Property(AppSpotlight.Path)])</onfocus>
+                    <include content="Object_ContentDynamic">
+                        <param name="content">$INFO[Window(Home).Property(AppSpotlight.Path)]</param>
+                        <param name="target">videos</param>
+                        <param name="browse">never</param>
+                    </include>
+                </include>
+            </control>
+
+            <control type="label" id="331">
+                <left>60</left>
+                <top>300</top>
+                <width>800</width>
+                <height>70</height>
                 <font>font_head_bold</font>
-                <textcolor>$VAR[AppSpotlight_BrandColor]</textcolor>
+                <textcolor>main_fg_100</textcolor>
                 <shadowcolor>66000000</shadowcolor>
-                <label>$VAR[AppSpotlight_BrandText]</label>
-                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
+                <label>$VAR[AppSpotlight_EmptyMessage]</label>
+                <visible>!Container(330).IsUpdating + Integer.IsEqual(Container(330).NumItems,0) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
+            </control>
+            <control type="button" id="332">
+                <left>60</left>
+                <top>380</top>
+                <width>420</width>
+                <height>72</height>
+                <font>font_main_bold</font>
+                <textcolor>main_fg_100</textcolor>
+                <focusedcolor>main_fg_100</focusedcolor>
+                <label>$VAR[AppSpotlight_OpenAppLabel]</label>
+                <onclick>RunPlugin($VAR[AppSpotlight_OpenAppLink])</onclick>
+                <onfocus>Container.Update($INFO[Window(Home).Property(AppSpotlight.Path)])</onfocus>
+                <visible>!Container(330).IsUpdating + Integer.IsEqual(Container(330).NumItems,0) + !String.IsEmpty($VAR[AppSpotlight_OpenAppLink])</visible>
+                <onup>330</onup>
             </control>
 
             <control type="group">
@@ -615,42 +654,45 @@
         <value>$INFO[Skin.String(HomeSwitcher.Home.Spotlight.Target)]</value>
     </variable>
 
-    <variable name="AppSpotlight_BrandText">
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),YouTube)">YouTube</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Disney+)">Disney+</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Channel 4)">CHANNEL 4</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),BBC iPlayer)">BBC iPlayer</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),ITVX)">itvX</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Netflix)">NETFLIX</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Prime Video)">prime video</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Apple TV)">Apple TV+</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),GeForce NOW)">GEFORCE NOW</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Xbox Cloud Gaming)">XBOX CLOUD GAMING</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),My5)">my5</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),NOW)">NOW</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),discovery+)">discovery+</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),U)">U</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Paramount+)">Paramount+</value>
-        <value>$INFO[Window(Home).Property(AppSpotlight.Label)]</value>
+    <variable name="AppSpotlight_EmptyMessage">
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),BBC iPlayer)">No titles or streams found. Open BBC iPlayer?</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),ITVX)">No titles or streams found. Open ITVX?</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Channel 4)">No titles or streams found. Open Channel 4?</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Netflix)">No titles or streams found. Open Netflix?</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Prime Video)">No titles or streams found. Open Prime Video?</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Apple TV)">No titles or streams found. Open Apple TV?</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Disney+)">No titles or streams found. Open Disney+?</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),YouTube)">No titles or streams found. Open YouTube?</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Paramount+)">No titles or streams found. Open Paramount+?</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),HBO Max)">No titles or streams found. Open HBO Max?</value>
+        <value>No titles or streams found for this app.</value>
     </variable>
 
-    <variable name="AppSpotlight_BrandColor">
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Netflix)">FFE50914</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Channel 4)">FF00C8E6</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),BBC iPlayer)">FFFFFFFF</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),ITVX)">FFFFFFFF</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),YouTube)">FFFFFFFF</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Disney+)">FFFFFFFF</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Prime Video)">FFFFFFFF</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Apple TV)">FFFFFFFF</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),GeForce NOW)">FF76B900</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Xbox Cloud Gaming)">FF107C10</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),My5)">FFFFFFFF</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),NOW)">FF6A46FF</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),discovery+)">FFFFFFFF</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),U)">FF6B3FA0</value>
-        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Paramount+)">FFFFFFFF</value>
-        <value>main_fg_100</value>
+    <variable name="AppSpotlight_OpenAppLabel">
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),BBC iPlayer)">Open BBC iPlayer</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),ITVX)">Open ITVX</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Channel 4)">Open Channel 4</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Netflix)">Open Netflix</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Prime Video)">Open Prime Video</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Apple TV)">Open Apple TV</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Disney+)">Open Disney+</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),YouTube)">Open YouTube</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Paramount+)">Open Paramount+</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),HBO Max)">Open HBO Max</value>
+        <value>Open selected app</value>
+    </variable>
+
+    <variable name="AppSpotlight_OpenAppLink">
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),BBC iPlayer)">plugin://plugin.program.unifiedlists/?action=launch_app&amp;app=bbc-iplayer</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),ITVX)">plugin://plugin.program.unifiedlists/?action=launch_app&amp;app=itvx</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Channel 4)">plugin://plugin.program.unifiedlists/?action=launch_app&amp;app=channel-4</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Netflix)">plugin://plugin.program.unifiedlists/?action=launch_app&amp;app=netflix</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Prime Video)">plugin://plugin.program.unifiedlists/?action=launch_app&amp;app=prime-video</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Apple TV)">plugin://plugin.program.unifiedlists/?action=launch_app&amp;app=apple-tv</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Disney+)">plugin://plugin.program.unifiedlists/?action=launch_app&amp;app=disney-plus</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),YouTube)">plugin://plugin.program.unifiedlists/?action=launch_app&amp;app=youtube</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),Paramount+)">plugin://plugin.program.unifiedlists/?action=launch_app&amp;app=paramount-plus</value>
+        <value condition="String.IsEqual(Window(Home).Property(AppSpotlight.Label),HBO Max)">plugin://plugin.program.unifiedlists/?action=launch_app&amp;app=hbo-max</value>
     </variable>
 
     <include name="Hub_Spotlight_List">
