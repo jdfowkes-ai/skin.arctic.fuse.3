@@ -709,7 +709,7 @@
 
     <include name="List_ButtonMenu_Row_HiddenButton_View">
         <control type="button">
-            <onup condition="Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">329</onup>
+            <onup condition="Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">330</onup>
             <visible allowhiddenfocus="true">false</visible>
             <animation effect="fade" start="0" end="0" time="400" reversible="false">Focus</animation>
             <include>List_ButtonMenu_Row_HiddenButton_View_OnFocus</include>
@@ -749,7 +749,7 @@
         <param name="underline">false</param>
         <definition>
             <control type="$PARAM[control]" id="$PARAM[id]">
-                <onup condition="Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">329</onup>
+                <onup condition="Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">330</onup>
                 <nested />
                 <include content="$PARAM[hidden_button]_OnFocus" condition="$PARAM[hidden_button_enabled]">
                     <param name="id">$PARAM[id]</param>
@@ -876,15 +876,17 @@
         <param name="condition">true</param>
         <definition>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Label,$ESCINFO[$PARAM[container]ListItem.Label])</onfocus>
-            <onup condition="$PARAM[condition] + Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">329</onup>
+            <onup condition="$PARAM[condition] + Window.IsVisible(Home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))">330</onup>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Title,$ESCINFO[$PARAM[container]ListItem.Title])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].TVShowTitle,$ESCINFO[$PARAM[container]ListItem.TVShowTitle])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Genre,$ESCINFO[$PARAM[container]ListItem.Genre])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Year,$ESCINFO[$PARAM[container]ListItem.Year])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Studio,$ESCINFO[$PARAM[container]ListItem.Studio])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].FolderPath,$ESCINFO[$PARAM[container]ListItem.FolderPath])</onfocus>
-            <!-- The app tile's fanart fills the hero; its icon is layered over it. -->
-            <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_blur))">SetProperty(AppSpotlight.Blur,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_blur)],Home)</onfocus>
+            <!-- Apps retain their own hero art; the poster wall follows the focused title's fanart. -->
+            <onfocus condition="$PARAM[condition] + Integer.IsEqual($PARAM[id],330) + !String.IsEmpty($PARAM[container]ListItem.Art(fanart))">SetProperty(AppSpotlight.Blur,$ESCINFO[$PARAM[container]ListItem.Art(fanart)],Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + Integer.IsEqual($PARAM[id],330) + String.IsEmpty($PARAM[container]ListItem.Art(fanart))">ClearProperty(AppSpotlight.Blur,Home)</onfocus>
+            <onfocus condition="$PARAM[condition] + !Integer.IsEqual($PARAM[id],330) + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_blur))">SetProperty(AppSpotlight.Blur,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_blur)],Home)</onfocus>
             <onfocus condition="$PARAM[condition] + !Integer.IsEqual($PARAM[id],330) + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_blur))">ClearProperty(AppSpotlight.Blur,Home)</onfocus>
             <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_logo))">SetProperty(AppSpotlight.Logo,$ESCINFO[$PARAM[container]ListItem.Property(app_spotlight_logo)],Home)</onfocus>
             <onfocus condition="$PARAM[condition] + !Integer.IsEqual($PARAM[id],330) + String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_logo))">ClearProperty(AppSpotlight.Logo,Home)</onfocus>
