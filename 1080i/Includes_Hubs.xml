@@ -439,7 +439,7 @@
                 <height>1080</height>
                 <aspectratio>scale</aspectratio>
                 <texture background="true">$INFO[Window(Home).Property(AppSpotlight.Blur)]</texture>
-                <visible>String.IsEqual($PARAM[window],home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Blur))</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Blur))</visible>
                 <animation effect="fade" start="0" end="100" time="300" reversible="true">Visible</animation>
                 <animation effect="fade" start="100" end="0" time="200" reversible="true">Hidden</animation>
             </control>
@@ -449,22 +449,18 @@
                 <left>40</left>
                 <top>180</top>
                 <width>1840</width>
-                <height>320</height>
-                <visible>String.IsEqual($PARAM[window],home) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
+                <height>380</height>
+                <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
                 <include content="List_Poster_Row">
                     <param name="id">330</param>
-                    <param name="item_w">160</param>
-                    <param name="item_h">225</param>
-                    <param name="itemlayout_w">200</param>
-                    <param name="itemlayout_h">270</param>
                     <param name="offset_x">0</param>
-                    <param name="offset_y">15</param>
+                    <param name="offset_y">0</param>
                     <param name="detailed">false</param>
                     <orientation>horizontal</orientation>
                     <left>0</left>
                     <top>0</top>
                     <width>1840</width>
-                    <height>320</height>
+                    <height>380</height>
                     <onfocus>Container.Update($INFO[Window(Home).Property(AppSpotlight.Path)])</onfocus>
                     <include content="Object_ContentDynamic">
                         <param name="content">$INFO[Window(Home).Property(AppSpotlight.Path)]</param>
@@ -483,7 +479,7 @@
                 <textcolor>main_fg_100</textcolor>
                 <shadowcolor>66000000</shadowcolor>
                 <label>$VAR[AppSpotlight_EmptyMessage]</label>
-                <visible>String.IsEqual($PARAM[window],home) + !Container(330).IsUpdating + Integer.IsEqual(Container(330).NumItems,0) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
+                <visible>!Container(330).IsUpdating + Integer.IsEqual(Container(330).NumItems,0) + !String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
             </control>
             <control type="button" id="332">
                 <left>60</left>
@@ -496,7 +492,7 @@
                 <label>$VAR[AppSpotlight_OpenAppLabel]</label>
                 <onclick>RunPlugin($VAR[AppSpotlight_OpenAppLink])</onclick>
                 <onfocus>Container.Update($INFO[Window(Home).Property(AppSpotlight.Path)])</onfocus>
-                <visible>String.IsEqual($PARAM[window],home) + !Container(330).IsUpdating + Integer.IsEqual(Container(330).NumItems,0) + !String.IsEmpty($VAR[AppSpotlight_OpenAppLink])</visible>
+                <visible>!Container(330).IsUpdating + Integer.IsEqual(Container(330).NumItems,0) + !String.IsEmpty($VAR[AppSpotlight_OpenAppLink])</visible>
                 <onup>330</onup>
             </control>
 
@@ -520,7 +516,7 @@
 
                 <control type="grouplist" id="310">
                     <!-- Apps use the static hero art above; no app feed carousel. -->
-                    <visible>!String.IsEqual($PARAM[window],home) | String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
+                    <visible>String.IsEmpty(Window(Home).Property(AppSpotlight.Path))</visible>
 
                     <include content="Animation_Fade_Out">
                         <param name="condition">!ControlGroup(310).HasFocus() + !String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + Skin.HasSetting(Spotlight.EnableSlide)</param>
