@@ -447,11 +447,12 @@
             <!-- Keep the app name visible above its widget, even while its feed is empty. -->
             <control type="label" id="318">
                 <left>40</left>
-                <top>276</top>
+                <top>120</top>
                 <width>900</width>
                 <height>82</height>
-                <font>font_main_bold</font>
+                <font>font_head_bold</font>
                 <textcolor>main_fg_100</textcolor>
+                <shadowcolor>66000000</shadowcolor>
                 <label>$INFO[Window(Home).Property(AppSpotlight.Label)]</label>
                 <visible>!String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
             </control>
@@ -743,8 +744,8 @@
     </include>
 
     <include name="Hub_Window_Slide_OnSpotlight">
-        <animation effect="slide" start="0" end="0,240" time="400" tween="quadratic" reversible="false" condition="!ControlGroup(310).HasFocus() + !String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + Integer.IsEqual(Window.Property(TMDbHelper.WidgetContainer),301)">Conditional</animation>
-        <animation effect="slide" end="0" start="0,240" time="400" tween="quadratic" reversible="false" condition="![!ControlGroup(310).HasFocus() + !String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + Integer.IsEqual(Window.Property(TMDbHelper.WidgetContainer),301)]">Conditional</animation>
+        <animation effect="slide" start="0" end="0,240" time="400" tween="quadratic" reversible="false" condition="!ControlGroup(310).HasFocus() + !String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + Integer.IsEqual(Window.Property(TMDbHelper.WidgetContainer),301) + String.IsEmpty(Window(Home).Property(AppSpotlight.Label))">Conditional</animation>
+        <animation effect="slide" end="0" start="0,240" time="400" tween="quadratic" reversible="false" condition="![!ControlGroup(310).HasFocus() + !String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + Integer.IsEqual(Window.Property(TMDbHelper.WidgetContainer),301) + String.IsEmpty(Window(Home).Property(AppSpotlight.Label))]">Conditional</animation>
     </include>
 
     <include name="Hub_Window_Background">
