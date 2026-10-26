@@ -970,6 +970,10 @@
                         <param name="container">Container($PARAM[id]).</param>
                         <param name="prefix">$PARAM[hidden_button_prefix]</param>
                     </include>
+                    <include content="List_Widget_Row_HiddenButton" condition="!$PARAM[hidden_button_enabled] + !String.IsEmpty(ListItem.Property(app_spotlight_path))">
+                        <param name="id">$PARAM[id]</param>
+                        <param name="container">Container($PARAM[id]).</param>
+                    </include>
                     <control type="group">
                         <left>$PARAM[offset_x]</left>
                         <right>-$PARAM[offset_x]</right>
