@@ -503,7 +503,7 @@
             <animation effect="slide" end="0" start="0,440" time="400" tween="quadratic" reversible="false" condition="![$EXP[Exp_Hubs_Spotlight_SlideDown]]">Conditional</animation>
                 <height>hub_spotlight_h</height>
                 <visible>$EXP[Hub_Spotlight_Visible_Expression]</visible>
-                <visible>String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
+                <visible>!String.IsEqual($PARAM[window],home) | String.IsEmpty(Window(Home).Property(AppSpotlight.Label))</visible>
                 <include>Home_Info_Animation</include>
                 <control type="group">
                     <animation effect="fade" start="100" end="30" time="200" condition="!ControlGroup(310).HasFocus() + !String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + Skin.HasSetting(Spotlight.EnableSlide)">Conditional</animation>
