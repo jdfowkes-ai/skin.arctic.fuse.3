@@ -709,6 +709,7 @@
 
     <include name="List_ButtonMenu_Row_HiddenButton_View">
         <control type="button">
+            <onup condition="Window.IsVisible(Home) + Control.IsVisible(330) + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetFocus(330)</onup>
             <visible allowhiddenfocus="true">false</visible>
             <animation effect="fade" start="0" end="0" time="400" reversible="false">Focus</animation>
             <include>List_ButtonMenu_Row_HiddenButton_View_OnFocus</include>
@@ -875,6 +876,7 @@
         <param name="condition">true</param>
         <definition>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Label,$ESCINFO[$PARAM[container]ListItem.Label])</onfocus>
+            <onup condition="$PARAM[condition] + Window.IsVisible(Home) + Control.IsVisible(330) + !String.IsEmpty($PARAM[container]ListItem.Property(app_spotlight_path))">SetFocus(330)</onup>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Title,$ESCINFO[$PARAM[container]ListItem.Title])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].TVShowTitle,$ESCINFO[$PARAM[container]ListItem.TVShowTitle])</onfocus>
             <onfocus condition="$PARAM[condition]">SetProperty(WidgetMeta.$PARAM[id].Genre,$ESCINFO[$PARAM[container]ListItem.Genre])</onfocus>
