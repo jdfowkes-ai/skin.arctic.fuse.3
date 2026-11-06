@@ -1272,6 +1272,11 @@ msgid "Monthly"
 msgstr ""
 
 #: /1080i/Includes_SkinSettings.xml
+msgctxt "#31267"
+msgid "Title fallback"
+msgstr ""
+
+#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31268"
 msgid "Background fallback"
 msgstr ""
@@ -2617,34 +2622,4 @@ msgstr ""
 #: /1080i/Dialog_DialogCustom.xml
 msgctxt "#31637"
 msgid "Trailer source"
-msgstr ""
-
-#: /1080i/Dialog_DialogShortcuts.xml
-msgctxt "#31638"
-msgid "Hub type"
-msgstr ""
-
-#: /1080i/Dialog_DialogShortcuts.xml
-msgctxt "#31639"
-msgid "Custom"
-msgstr ""
-
-#: /1080i/Dialog_DialogShortcuts.xml
-msgctxt "#31640"
-msgid "Calendar source"
-msgstr ""
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31641"
-msgid "Focus style"
-msgstr ""
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31642"
-msgid "Outlined"
-msgstr ""
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31643"
-msgid "Solid"
 msgstr ""

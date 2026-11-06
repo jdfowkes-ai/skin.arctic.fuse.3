@@ -698,7 +698,7 @@
             <visible>!Control.HasFocus(3000)</visible>
         </control>
         <control type="image">
-            <include>Texture_Menu_Highlight_H</include>
+            <texture colordiffuse="$VAR[ColorHighlight]" border="40">common/menu.png</texture>
             <visible>Control.HasFocus(3000)</visible>
         </control>
 

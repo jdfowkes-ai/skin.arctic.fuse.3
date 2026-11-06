@@ -206,13 +206,11 @@
                     <control type="group">
                         <top>40</top>
                         <control type="image">
-                            <include>Texture_Box_Highlight_H</include>
+                            <texture colordiffuse="$VAR[ColorHighlight]" border="20">common/box.png</texture>
                             <visible>!String.IsEqual(Window(Home).Property(ColorPicker_Type),Highlight) | !Control.HasFocus(3000)</visible>
                         </control>
                         <control type="image">
-                            <include content="Texture_Box_Highlight_H">
-                                <param name="colordiffuse">$INFO[Container(3000).ListItem.Label]</param>
-                            </include>
+                            <texture colordiffuse="$INFO[Container(3000).ListItem.Label]" border="20">common/box.png</texture>
                             <visible>String.IsEqual(Window(Home).Property(ColorPicker_Type),Highlight) + Control.HasFocus(3000)</visible>
                         </control>
                         <control type="group">
