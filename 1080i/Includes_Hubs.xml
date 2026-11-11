@@ -285,6 +285,7 @@
                     <param name="visible_plot">true</param>
                     <param name="visible_meta">true</param>
                     <param name="include_title">false</param>
+                    <param name="hide_genre_plotline">true</param>
                     <param name="container">Container($PARAM[id]).</param>
                 </include>
             </control>

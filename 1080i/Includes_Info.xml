@@ -1267,7 +1267,7 @@
         </include>
 
         <!-- Genre Plotline -->
-        <include content="Info_Plot_Main_Plotline_Content" condition="Skin.String(Plotline.$PARAM[dbtype],Genre)">
+        <include content="Info_Plot_Main_Plotline_Content" condition="Skin.String(Plotline.$PARAM[dbtype],Genre) + !String.IsEqual($PARAM[hide_genre_plotline],true)">
             <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Genre]</param>
             <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Genre)</param>
             <param name="colordiffuse">$PARAM[colordiffuse]</param>
@@ -1306,6 +1306,7 @@
                 <param name="use_textbox">$PARAM[use_textbox]</param>
                 <param name="height">$PARAM[height]</param>
                 <param name="width">$PARAM[width]</param>
+                <param name="hide_genre_plotline">$PARAM[hide_genre_plotline]</param>
             </include>
         </control>
 
@@ -1323,6 +1324,7 @@
                 <param name="use_textbox">$PARAM[use_textbox]</param>
                 <param name="height">$PARAM[height]</param>
                 <param name="width">$PARAM[width]</param>
+                <param name="hide_genre_plotline">$PARAM[hide_genre_plotline]</param>
             </include>
         </control>
 
@@ -1338,6 +1340,7 @@
                 <param name="use_textbox">$PARAM[use_textbox]</param>
                 <param name="height">$PARAM[height]</param>
                 <param name="width">$PARAM[width]</param>
+                <param name="hide_genre_plotline">$PARAM[hide_genre_plotline]</param>
             </include>
         </control>
     </include>
@@ -1359,6 +1362,7 @@
     </include>
 
     <include name="Info_Plot">
+        <param name="hide_genre_plotline">false</param>
         <param name="visible">true</param>
         <param name="listitem">ListItem</param>
         <param name="height">120</param>
@@ -1391,6 +1395,7 @@
                 <param name="height">$PARAM[height]</param>
                 <param name="override">$PARAM[override]</param>
                 <param name="visible">$PARAM[visible]</param>
+                <param name="hide_genre_plotline">$PARAM[hide_genre_plotline]</param>
             </include>
 
             <!-- OTHER -->
@@ -1416,6 +1421,7 @@
 
     <include name="Info_Panel">
         <param name="container" />
+        <param name="hide_genre_plotline">false</param>
         <param name="include_title">true</param>
         <param name="include_details">true</param>
         <param name="colordiffuse">main_fg</param>
@@ -1466,6 +1472,7 @@
                     <param name="colordiffuse">$PARAM[colordiffuse]</param>
                     <param name="container">$PARAM[container]</param>
                     <param name="listitem">$PARAM[listitem]</param>
+                    <param name="hide_genre_plotline">$PARAM[hide_genre_plotline]</param>
                     <param name="width">$PARAM[plotwidth]</param>
                     <param name="height">$PARAM[plotheight]</param>
                     <param name="visible">$PARAM[visible_plot]</param>
