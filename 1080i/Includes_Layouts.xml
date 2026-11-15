@@ -2544,6 +2544,13 @@
                         <param name="aspectratio">scale</param>
                     </include>
 
+                    <control type="image">
+                        <include content="Dimension_Padding"><param name="pad">0</param></include>
+                        <texture colordiffuse="$VAR[ColorWatchedProgress]" flipx="true" flipy="true">$INFO[$PARAM[listitem].Property(KodiHome.ProgressPercent),progress/circle/p,.png]</texture>
+                        <aspectratio align="center" aligny="center">keep</aspectratio>
+                        <visible>Integer.IsGreater($PARAM[listitem].Property(KodiHome.ProgressPercent),0)</visible>
+                    </control>
+
                     <control type="group">
                         <centerbottom>15%</centerbottom>
                         <centerright>15%</centerright>
