@@ -1,5 +1,11 @@
 [
     {
+        "label": "Kodi Favourites",
+        "icon": "",
+        "path": "plugin://plugin.video.kodihome/?action=kodi_favourites",
+        "target": "videos"
+    },
+    {
         "label": "On Deck",
         "icon": "",
         "path": "special://skin/extras/playlists/InProgressMovies.xsp",
