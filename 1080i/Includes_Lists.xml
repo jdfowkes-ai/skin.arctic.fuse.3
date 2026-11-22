@@ -749,6 +749,10 @@
         <definition>
             <control type="$PARAM[control]" id="$PARAM[id]">
                 <nested />
+                <!-- Kodi Favourites widgets refresh once and return to their
+                     first item when focus comes back after leaving the row. -->
+                <onunfocus condition="String.IsEqual(Container($PARAM[id]).ListItem.Property(KodiHome.ResetOnLeave),true) + String.IsEmpty(Window(Home).Property(KodiHome.FavouritesRefreshing))">SetProperty(KodiHome.WidgetReset.$PARAM[id],true,Home)</onunfocus>
+                <onfocus condition="String.IsEqual(Container($PARAM[id]).ListItem.Property(KodiHome.ResetOnLeave),true) + String.IsEqual(Window(Home).Property(KodiHome.WidgetReset.$PARAM[id]),true)">RunPlugin(plugin://plugin.video.kodihome/?action=refresh_kodi_favourites_widget&amp;control=$PARAM[id])</onfocus>
                 <include content="$PARAM[hidden_button]_OnFocus" condition="$PARAM[hidden_button_enabled]">
                     <param name="id">$PARAM[id]</param>
                     <param name="container">Container($PARAM[id]).</param>
