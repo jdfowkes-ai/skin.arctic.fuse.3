@@ -114,6 +114,8 @@
                     <onback condition="Player.HasMedia">309</onback>
 
                     <ondown>ActivateWindow(1180)</ondown>
+                    <onunfocus condition="String.IsEmpty(Window(Home).Property(KodiHome.WidgetRefreshing))">SetProperty(KodiHome.WidgetReset.$PARAM[id],true,Home)</onunfocus>
+                    <onfocus condition="String.IsEqual(Window(Home).Property(KodiHome.WidgetReset.$PARAM[id]),true)">RunPlugin(plugin://plugin.video.kodihome/?action=refresh_widget_after_focus_return&amp;control=$PARAM[id])</onfocus>
                     <onfocus>SetProperty(TMDbHelper.WidgetContainer,$PARAM[id])</onfocus>
                     <onfocus>SetProperty(Background.ShowOverlay,True,Home)</onfocus>
                     <onfocus condition="![$PARAM[home_switcher]]">ClearProperty(HomeSwitcher.IsVisible,Home)</onfocus>
@@ -163,6 +165,8 @@
 
                 <include>Hub_Grouplist_OnLeftRight</include>
                 <ondown>ActivateWindow(1180)</ondown>
+                <onunfocus condition="String.IsEmpty(Window(Home).Property(KodiHome.WidgetRefreshing))">SetProperty(KodiHome.WidgetReset.$PARAM[id],true,Home)</onunfocus>
+                <onfocus condition="String.IsEqual(Window(Home).Property(KodiHome.WidgetReset.$PARAM[id]),true)">RunPlugin(plugin://plugin.video.kodihome/?action=refresh_widget_after_focus_return&amp;control=$PARAM[id])</onfocus>
                 <onfocus>SetProperty(TMDbHelper.WidgetContainer,$PARAM[id])</onfocus>
                 <onfocus>ClearProperty(Background.ShowOverlay,Home)</onfocus>
                 <onfocus>ClearProperty(HomeSwitcher.IsVisible,Home)</onfocus>
